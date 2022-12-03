@@ -1,0 +1,306 @@
+package io;
+import java.util.*;
+import java.text.NumberFormat;
+import java.util.Locale;
+
+public class studikasus4fixed {
+
+    //printMenu
+    public static void printMenu() {
+        System.out.println("\n\n=================================================");
+        System.out.println("\t\tFILKOM RAIL EXPRESS");
+        System.out.println("  \t  PROGRAM PEMESANAN TIKET KERETA");
+        System.out.println("=================================================");
+    }
+    
+    //printMenu2()
+    public static void printMenu2() {
+        System.out.println("\nMenu");
+        System.out.println("1. Beli Tiket");
+        System.out.println("2. Lihat Jenis Tiket");
+        System.out.println("3. List Stasiun");
+        System.out.println("4. Riwayat Pesanan");
+        System.out.println("5. Keluar");
+        System.out.print("Masukkan pilihan anda : ");
+    }    
+
+    //printStasiun
+    public static void printStasiun() {
+        System.out.println("\n\nList stasiun tersedia : ");
+        System.out.println("1.Malang" + " \t 4.Semarang" + " \t 7.Serang" + " \n2.Surabaya" + " \t 5.Bandung"  + " \n3.Yogyakarta" + " \t 6.Jakarta");
+    }
+
+    ///printTiket
+    public static void printTiket() {
+        System.out.println("\nJenis Tiket : ");
+        System.out.println("1. Economy Class \n2. Business Class \n3. First Class");
+    }
+
+    //hitungJarak
+    public static int hitungJarak(String stasiunawal, String stasiuntujuan) {
+        int jarak = 0;
+        if(stasiunawal.equals("Malang") || stasiunawal.equals("Surabaya") || stasiunawal.equals("Yogyakarta")) {
+            if(stasiunawal.equals("Malang")) {
+                switch (stasiuntujuan) {
+                    case "Surabaya":
+                    jarak = 100; return jarak;
+                    case "Yogyakarta":
+                    jarak = 400; return jarak;
+                    case "Serang":
+                    jarak = 1000; return jarak;
+                }
+            }
+            else if (stasiunawal.equals("Surabaya")) {
+                switch (stasiuntujuan) {
+                    case "Semarang":
+                    jarak = 350; return jarak;
+                    case "Bandung":
+                    jarak = 700; return jarak;
+                }
+            }
+            else if (stasiunawal.equals("Yogyakarta")) {
+                switch (stasiuntujuan) {
+                    case "Jakarta":
+                    jarak = 500; return jarak;
+                }
+            }
+        }else {
+        }
+        return jarak;
+    }
+
+    //hitungHarga
+    public static int hitungHarga(int jenistiket, int jarak, String stasiunawal, String stasiuntujuan) {
+        int hargaekonomi = (4000/10);
+        int hargabusiness = (7000/10);
+        int hargafirst = (10000/10);
+        int hargatiket = 0;
+        if (jenistiket == 1) {
+            
+            hargatiket = hargaekonomi * hitungJarak(stasiunawal, stasiuntujuan);
+            return hargatiket;
+            
+        }
+        else if (jenistiket == 2) {
+        hargatiket = hargabusiness * hitungJarak(stasiunawal, stasiuntujuan);
+        return hargatiket;
+        }
+        else if (jenistiket == 3) {
+        hargatiket = hargafirst * hitungJarak(stasiunawal, stasiuntujuan);
+        return hargatiket;
+        }
+
+        return hargatiket;
+        
+    }
+
+    //hitungTotal
+    //Skhirnya udah bener, salah panggil variable pas method
+    public static int hitungTotal(int jumlahtiket, int jenistiket, String stasiunawal, String stasiuntujuan, int jarak) {
+        int hargatiketakhir = hitungHarga(jenistiket, jarak, stasiunawal, stasiuntujuan) * jumlahtiket;
+        return hargatiketakhir;
+    }
+
+    //hitungKembalian
+    //Udah bener
+    public static int hitungKembalian(int bayar, int jumlahtiket, int jenistiket, String stasiunawal, String stasiuntujuan, int jarak) {
+        int kembalian = bayar - hitungTotal(jumlahtiket, jenistiket, stasiunawal, stasiuntujuan, jarak);
+        return kembalian;
+    }
+
+    //printKembalian
+    private static void printKembalian(String nama, String nik, String alamat, String nomortelepon, String tanggalberangkat, String stasiunawal, String stasiuntujuan, int jumlahtiket) {
+        System.out.println("=================================================");
+        System.out.println("\t     Pemesanan Tiket Berhasil");
+        System.out.println("=================================================");
+        System.out.println("\t\tDETAIL PESANAN");
+        System.out.println("=================================================");
+        System.out.println("Nama \t\t\t : " + nama);
+        System.out.println("NIK \t\t\t : " + nik);
+        System.out.println("Alamat \t\t\t : " + alamat);
+        System.out.println("Nomor Telepon \t\t : " + nomortelepon);
+        System.out.println("Tanggal Keberangkatan \t : " + tanggalberangkat);
+        System.out.println("Rute \t\t\t : " + stasiunawal + "-" + stasiuntujuan + "(" + hitungJarak(stasiunawal, stasiuntujuan) + " km)");
+        System.out.println("Jumlah Tiket \t\t : " + jumlahtiket);
+    }  
+
+    //printID
+    //udah bener
+    public static String printID(String ID, String stasiunawal, String stasiuntujuan) {
+        ID = "";
+        if(stasiunawal.equals("Malang") || stasiunawal.equals("Surabaya") || stasiunawal.equals("Yogyakarta")) {
+            if(stasiunawal.equals("Malang")) {
+                switch (stasiuntujuan) {
+                    case "Surabaya":
+                    ID = "MLG-SBY"; return ID;
+                    case "Yogyakarta":
+                    ID = "MLG-YOG"; return ID;
+                    case "Serang":
+                    ID = "MLG-SRG"; return ID;
+                }
+            }
+            else if (stasiunawal.equals("Surabaya")) {
+                switch (stasiuntujuan) {
+                    case "Semarang":
+                    ID = "SBY-SEM"; return ID;
+                    case "Bandung":
+                    ID = "SBY-BND"; return ID;
+                }
+            }
+            else if (stasiunawal.equals("Yogyakarta")) {
+                switch (stasiuntujuan) {
+                    case "Jakarta":
+                    ID = "YOG-JKT"; return ID;
+                }
+            }
+        }
+        return ID;
+    }
+
+    //Riwayat
+    //Udah bener
+    public static String tambahRiwayat(String ID, String stasiunawal, String stasiuntujuan, String tanggalberangkat) {
+        String riwayat = printID(ID, stasiunawal, stasiuntujuan) + " : " + tanggalberangkat;
+        return riwayat;
+
+    }
+
+    //printriwayat
+    //tinggal ini
+    public static void printRiwayat(int i, String[] riwayat) {
+        for (int j = 0; j < i; j++) {
+            System.out.println(riwayat[j]);
+        }
+        System.out.println("");
+    }
+    
+    public static void main(String[] args) {
+        Scanner studikasus4 = new Scanner(System.in);
+        int ulang = 1; int jarak = 0; int kembalian = 0; String stasiunawal; String stasiuntujuan;
+        String ID = "";
+
+        printMenu();
+        String[] riwayat = new String[5];
+        //Mulai kode input
+        int i =0; int n=0;
+        while (ulang == 1) {
+            printMenu2();
+            int condition = studikasus4.nextInt();
+            if (condition == 1) { //beli tiket
+                System.out.println("Silahkan masukkan data diri Anda"); 
+                studikasus4.nextLine();      
+                System.out.print("Nama \t\t\t : ");
+                String nama = studikasus4.nextLine();
+                System.out.print("NIK \t\t\t : ");
+                String nik = studikasus4.nextLine();
+                System.out.print("Alamat \t\t\t : ");
+                String alamat = studikasus4.nextLine();
+                System.out.print("Nomor Telepon \t\t : ");
+                String nomortelepon = studikasus4.nextLine();
+                System.out.println("=================================================");
+                System.out.println("Silahkan pilih tiket Anda");
+                System.out.println("=================================================");
+                System.out.println("List stasiun tersedia : ");
+                System.out.println("1.Malang" + " \t 4.Semarang" + " \t 7.Serang" + " \n2.Surabaya" + " \t 5.Bandung"  + " \n3.Yogyakarta" + " \t 6.Jakarta");
+                System.out.println("\nJenis Tiket : ");
+                System.out.println("1. Economy Class \n2. Business Class \n3. First Class");
+                System.out.print("\nTanggal Keberangkatan \t : ");
+                String tanggalberangkat = studikasus4.nextLine();
+                System.out.print("Stasiun Awal \t\t : ");
+                stasiunawal = studikasus4.nextLine();
+                System.out.print("Stasiun Tujuan \t\t : ");
+                stasiuntujuan = studikasus4.nextLine();
+                System.out.print("Jenis Tiket \t\t : ");
+                int jenistiket = studikasus4.nextInt();
+                System.out.print("Jumlah Tiket \t\t : ");
+                int jumlahtiket = studikasus4.nextInt();
+                System.out.print("Nominal Pembayaran \t : ");
+                int bayar = studikasus4.nextInt();
+
+                NumberFormat NumberFormatter = NumberFormat.getNumberInstance(Locale.GERMANY);
+
+                int input = 1;
+                int hargatiket = hitungTotal(jumlahtiket, jenistiket, stasiunawal, stasiuntujuan, jarak);
+                kembalian = hitungKembalian(bayar, jumlahtiket, jenistiket, stasiunawal, stasiuntujuan, jarak);
+                String hargastr = NumberFormatter.format(hargatiket);
+                String kembalianstr = NumberFormatter.format(kembalian);
+
+                //kondisi berhasil
+                if (input == 1) {
+                    if (kembalian >= 0) {
+                        printKembalian(nama, nik, alamat, nomortelepon, tanggalberangkat, stasiunawal, stasiuntujuan, jumlahtiket);
+                        System.out.println("\nTotal Harga \t\t : " + hargastr + ",-");
+                        String bayarstr = NumberFormatter.format(bayar);
+                        System.out.println("Nominal Pembayaran \t : " + bayarstr + ",-");
+                        System.out.println("Kembalian \t\t : " + kembalianstr + ",-");
+                        System.out.println(printID(ID, stasiunawal, stasiuntujuan));
+                        System.out.println(tambahRiwayat(ID, stasiunawal, stasiuntujuan, tanggalberangkat));
+                        riwayat[i] = tambahRiwayat(ID, stasiunawal, stasiuntujuan, tanggalberangkat);
+                        i++;
+                    }
+
+                    
+                    //kondisi tidak berhasil
+                    else if (kembalian < 0) {
+                        int ulangkembalian = 1;
+                        while (ulangkembalian == 1) {
+                            System.out.println("\nMaaf, uang anda tidak mencukupi");
+                            System.out.println("1. Batalkan Pesanan");
+                            System.out.println("2. Ulangi Pembayaran");
+                            int pengulangankembalian = studikasus4.nextInt();
+                            if (pengulangankembalian == 1) {
+                                break;
+                            }
+                            else if (pengulangankembalian == 2) {
+                                System.out.print("Nominal Pembayaran\t: ");
+                                
+                                int bayarlagi = studikasus4.nextInt();
+                                int kembalianlagi = bayarlagi - hargatiket;
+                                String bayarlagistr = NumberFormatter.format(bayarlagi);
+                                String kembalianlagistr = NumberFormatter.format(kembalianlagi);
+
+                                if (kembalianlagi > 0) {
+                                    System.out.println("=================================================");
+                                    System.out.println("\t     Pemesanan Tiket Berhasil");
+                                    System.out.println("=================================================");
+                                    System.out.println("\t\tDETAIL PESANAN");
+                                    System.out.println("=================================================");
+                                    System.out.println("Nama \t\t\t : " + nama);
+                                    System.out.println("NIK \t\t\t : " + nik);
+                                    System.out.println("Alamat \t\t\t : " + alamat);
+                                    System.out.println("Nomor Telepon \t\t : " + nomortelepon);
+                                    System.out.println("Tanggal Keberangkatan \t : " + tanggalberangkat);
+                                    System.out.println("Rute \t\t\t : " + stasiunawal + "-" + stasiuntujuan + "(" + hitungJarak(stasiunawal, stasiuntujuan) + " km)");
+                                    System.out.println("Jumlah Tiket \t\t : " + jumlahtiket);
+                                    System.out.println("\nTotal Harga \t\t : " + hargastr + ",-");
+                                    System.out.println("Nominal Pembayaran \t : " + bayarlagistr + ",-");
+                                    System.out.println("Kembalian \t\t : " + kembalianlagistr + ",-");
+                                    break;
+                                }
+                            }
+            
+                        }
+                    }
+                }
+                jarak = hitungJarak(stasiunawal, stasiuntujuan);
+                if (jarak == 0) {
+                    System.out.println("=================================================");
+                    System.out.println("\t Maaf, rute tidak ditemukan");
+                    System.out.println("=================================================");
+                }
+            }
+            else if (condition == 2) {
+                printTiket();
+            }
+            else if (condition == 3) {
+                printStasiun();
+            }
+            else if (condition == 4) {
+                printRiwayat(i,  riwayat);
+            }
+            else if (condition == 5) {
+                return;
+            }
+        }    
+        }
+        }
